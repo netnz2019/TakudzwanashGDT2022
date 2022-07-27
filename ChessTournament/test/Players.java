@@ -10,11 +10,11 @@
 public class Players {
 //INTANCE VERIABLE
   private String playername;
-  private int movestillwin;
-  private int duration;
+  private String movestillwin;
+  private String duration;
 
  //Constructor that takes arguments
-  public Players (String playername,int movestillwin,int duration){
+  public Players (String playername,String movestillwin,String duration){
     this.playername = playername;
     this.movestillwin = movestillwin;
     this.duration = duration;
@@ -24,23 +24,23 @@ public class Players {
     return this.playername;
   }
   
-  public int getmovestillwin(){
+  public String getmovestillwin(){
     return this.movestillwin;
   }
   
-  public int getduration(){
+  public String getduration(){
     return this.duration;
   }
 //setter
-  public void setplayername(String playername){
+  public void setplayername( String playername){
   this.playername = playername;
   }
   
-  public void setmovestillwin(int movestillwin){
+  public void setmovestillwin(String movestillwin){
   this.movestillwin = movestillwin;
   }
   
-  public void setduration(int duration){
+  public void setduration(String duration){
   this.duration = duration;
   }
   
