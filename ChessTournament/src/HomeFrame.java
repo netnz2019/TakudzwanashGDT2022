@@ -1,3 +1,22 @@
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -8,12 +27,31 @@
  * @author tgumb
  */
 public class HomeFrame extends javax.swing.JFrame {
+    
+    private String playername;
+    private String playername2;
+    private String playername3;
+    private String playername4;
+    private String playername5;
+    private String playername6;
+    private String playername7;
+    private String playername8;
+    private String movestillwin;
+    private String duration;
+    
+    List<Players> players = new ArrayList<Players>();
+    
+    
 
     /**
      * Creates new form HomeFrame
      */
     public HomeFrame() {
         initComponents();
+        
+     theHandler handler = new theHandler();
+     start.addActionListener(handler);
+     jButton1.addActionListener(handler);    
     }
 
     /**
@@ -81,11 +119,10 @@ public class HomeFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(name5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(name8, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(name8, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -193,11 +230,72 @@ public class HomeFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new HomeFrame().setVisible(true);
             }
         });
     }
+   
+        
+    private class theHandler implements ActionListener {
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        playername = name1.getText();
+        playername2 = name2.getText();
+        playername3 = name3.getText();
+        playername4 = name4.getText();
+        playername5 = name5.getText();
+        playername6 = name6.getText();
+        playername7 = name7.getText();
+        playername8 = name8.getText();
+        movestillwin = date.getText();
+        duration = jButton1.getText();
+        
+        if (event.getSource() == start) {
+        playername = name1.getText();
+        playername2 = name2.getText();
+        playername3 = name3.getText();
+        playername4 = name4.getText();
+        playername5 = name5.getText();
+        playername6 = name6.getText();
+        playername7 = name7.getText();
+        playername8 = name8.getText();
+        
+        Players play = new Players(playername,playername2,playername3,playername4,playername5,playername6,playername7,playername8,movestillwin,duration);
+        
+        players.add(play); // <-- adds the Player to the list.  
+        name1.setText("");
+        name2.setText("");
+        name3.setText("");
+        name4.setText("");
+        name5.setText("");
+        name6.setText("");
+        name7.setText("");
+        name8.setText("");
+        
+        for(int i = 0; i < players.size(); i++) {
+        System.out.println(players.get(i).getPlayername());
+        }
+        
+        {
+        try {
+         FileOutputStream fileOut = new FileOutputStream("players.ser");//This saves the data to a file called players.ser in the save folder as the Main.java file.
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(players);//This save the data in the players arraylist
+         out.close();
+         fileOut.close();
+         System.out.println("Serialized data is saved in players.ser");
+        }catch(IOException i) {
+         i.printStackTrace();
+        }
+    }
+     }
+}
+    }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField date;
