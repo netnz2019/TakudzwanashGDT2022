@@ -7,7 +7,7 @@
  *
  * @author tgumb
  */
-public class Players {
+public class Players implements java.io.Serializable {
 //INTANCE VERIABLE
   private String playername;
   private String playername2;
