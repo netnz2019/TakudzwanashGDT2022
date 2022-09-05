@@ -4,6 +4,20 @@
  */
 package FirstRoundFrame;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 /**
  *
  * @author tgumb
@@ -16,6 +30,19 @@ public class FirstRoundFrame extends javax.swing.JFrame {
     public FirstRoundFrame() {
         initComponents();
     }
+    
+    public static void loadSaved(){
+  try
+        {
+            FileInputStream fileIn = new FileInputStream("pens.ser");//The file that data has been save to, pens.ser
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            in.close();
+            fileIn.close();
+         }catch(IOException ioe){
+             ioe.printStackTrace();
+             return;
+          }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,21 +54,21 @@ public class FirstRoundFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        PLAYER__2 = new javax.swing.JTextField();
-        PLAYER_5 = new javax.swing.JTextField();
-        PLAYER_6 = new javax.swing.JTextField();
-        PLAYER_4 = new javax.swing.JTextField();
-        PLAYER_7 = new javax.swing.JTextField();
-        PLAYER_8 = new javax.swing.JTextField();
-        PLAYER__1 = new javax.swing.JTextField();
-        PLAYER_10 = new javax.swing.JTextField();
-        PLAYER_11 = new javax.swing.JTextField();
-        PLAYER_12 = new javax.swing.JTextField();
-        PLAYER_9 = new javax.swing.JTextField();
-        PLAYER_3 = new javax.swing.JTextField();
-        PLAYER_2 = new javax.swing.JTextField();
-        PLAYER_1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        PLAYER__1 = new javax.swing.JButton();
+        PLAYER__2 = new javax.swing.JButton();
+        PLAYER_5 = new javax.swing.JButton();
+        PLAYER_6 = new javax.swing.JButton();
+        PLAYER_10 = new javax.swing.JButton();
+        PLAYER_11 = new javax.swing.JButton();
+        PLAYER_3 = new javax.swing.JButton();
+        PLAYER_4 = new javax.swing.JButton();
+        PLAYER_7 = new javax.swing.JButton();
+        PLAYER_8 = new javax.swing.JButton();
+        PLAYER_9 = new javax.swing.JButton();
+        PLAYER_12 = new javax.swing.JButton();
+        PLAYER_1 = new javax.swing.JButton();
+        PLAYER_2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -49,68 +76,40 @@ public class FirstRoundFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel1.setText("CAS CHESS TOURNAMENT");
 
-        PLAYER__2.setEditable(false);
-        PLAYER__2.setText("PLAYER__2");
-        PLAYER__2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PLAYER__2ActionPerformed(evt);
-            }
-        });
+        jButton1.setText("SAVE");
 
-        PLAYER_5.setEditable(false);
-        PLAYER_5.setText("PLAYER_5");
-
-        PLAYER_6.setEditable(false);
-        PLAYER_6.setText("PLAYER_6");
-
-        PLAYER_4.setEditable(false);
-        PLAYER_4.setText("PLAYER_4");
-
-        PLAYER_7.setEditable(false);
-        PLAYER_7.setText("PLAYER_7");
-        PLAYER_7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PLAYER_7ActionPerformed(evt);
-            }
-        });
-
-        PLAYER_8.setEditable(false);
-        PLAYER_8.setText("PLAYER_8");
-
-        PLAYER__1.setEditable(false);
         PLAYER__1.setText("PLAYER__1");
-        PLAYER__1.setToolTipText("");
-        PLAYER__1.setActionCommand("<Not Set>");
         PLAYER__1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PLAYER__1ActionPerformed(evt);
             }
         });
 
-        PLAYER_10.setEditable(false);
+        PLAYER__2.setText("PLAYER__2");
+
+        PLAYER_5.setText("PLAYER_5");
+
+        PLAYER_6.setText("PLAYER_6");
+
         PLAYER_10.setText("PLAYER_10");
 
-        PLAYER_11.setEditable(false);
         PLAYER_11.setText("PLAYER_11");
 
-        PLAYER_12.setEditable(false);
-        PLAYER_12.setText("PLAYER_12");
-
-        PLAYER_9.setEditable(false);
-        PLAYER_9.setText("PLAYER_9");
-        PLAYER_9.setToolTipText("");
-
-        PLAYER_3.setEditable(false);
         PLAYER_3.setText("PLAYER_3");
 
-        PLAYER_2.setEditable(false);
-        PLAYER_2.setText("PLAYER_2");
+        PLAYER_4.setText("PLAYER_4");
 
-        PLAYER_1.setEditable(false);
+        PLAYER_7.setText("PLAYER_7");
+
+        PLAYER_8.setText("PLAYER_8");
+
+        PLAYER_9.setText("PLAYER_9");
+
+        PLAYER_12.setText("PLAYER_12");
+
         PLAYER_1.setText("PLAYER_1");
-        PLAYER_1.setToolTipText("");
 
-        jButton1.setText("SAVE");
+        PLAYER_2.setText("PLAYER_2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,42 +118,52 @@ public class FirstRoundFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 148, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(PLAYER_4))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(PLAYER_6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PLAYER_5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PLAYER__2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PLAYER__1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(128, 128, 128)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PLAYER_10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PLAYER_11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(PLAYER_9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PLAYER_12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PLAYER_8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PLAYER_7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PLAYER_4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PLAYER_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37))
+                                    .addComponent(PLAYER__1)
+                                    .addComponent(PLAYER__2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(5, 5, 5)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(PLAYER_6)
+                                            .addComponent(PLAYER_5))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(129, 129, 129)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(PLAYER_11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(PLAYER_12))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(PLAYER_10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(PLAYER_9)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(PLAYER_3))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(PLAYER_7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(PLAYER_8, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                .addGap(29, 29, 29))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(249, 249, 249)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PLAYER_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PLAYER_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(PLAYER_2)
+                            .addComponent(PLAYER_1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(232, 232, 232)
+                        .addGap(226, 226, 226)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -165,32 +174,36 @@ public class FirstRoundFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PLAYER__1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PLAYER_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PLAYER__1)
+                    .addComponent(PLAYER_3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PLAYER_9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PLAYER_10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PLAYER_4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PLAYER__2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(PLAYER_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(PLAYER_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PLAYER_5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PLAYER_7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PLAYER_11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PLAYER_12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PLAYER_10)
+                    .addComponent(PLAYER_9))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PLAYER_6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PLAYER_8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PLAYER__2)
+                    .addComponent(PLAYER_4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PLAYER_1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(PLAYER_5)
+                            .addComponent(PLAYER_7))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(PLAYER_2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PLAYER_11)
+                    .addComponent(PLAYER_12))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PLAYER_6)
+                    .addComponent(PLAYER_8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11))
@@ -202,14 +215,6 @@ public class FirstRoundFrame extends javax.swing.JFrame {
     private void PLAYER__1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PLAYER__1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PLAYER__1ActionPerformed
-
-    private void PLAYER__2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PLAYER__2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PLAYER__2ActionPerformed
-
-    private void PLAYER_7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PLAYER_7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PLAYER_7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,20 +252,20 @@ public class FirstRoundFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField PLAYER_1;
-    private javax.swing.JTextField PLAYER_10;
-    private javax.swing.JTextField PLAYER_11;
-    private javax.swing.JTextField PLAYER_12;
-    private javax.swing.JTextField PLAYER_2;
-    private javax.swing.JTextField PLAYER_3;
-    private javax.swing.JTextField PLAYER_4;
-    private javax.swing.JTextField PLAYER_5;
-    private javax.swing.JTextField PLAYER_6;
-    private javax.swing.JTextField PLAYER_7;
-    private javax.swing.JTextField PLAYER_8;
-    private javax.swing.JTextField PLAYER_9;
-    private javax.swing.JTextField PLAYER__1;
-    private javax.swing.JTextField PLAYER__2;
+    private javax.swing.JButton PLAYER_1;
+    private javax.swing.JButton PLAYER_10;
+    private javax.swing.JButton PLAYER_11;
+    private javax.swing.JButton PLAYER_12;
+    private javax.swing.JButton PLAYER_2;
+    private javax.swing.JButton PLAYER_3;
+    private javax.swing.JButton PLAYER_4;
+    private javax.swing.JButton PLAYER_5;
+    private javax.swing.JButton PLAYER_6;
+    private javax.swing.JButton PLAYER_7;
+    private javax.swing.JButton PLAYER_8;
+    private javax.swing.JButton PLAYER_9;
+    private javax.swing.JButton PLAYER__1;
+    private javax.swing.JButton PLAYER__2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
