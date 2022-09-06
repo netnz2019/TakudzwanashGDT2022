@@ -1,15 +1,11 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 
@@ -36,7 +32,7 @@ public class HomeFrame extends javax.swing.JFrame {
     private String movestillwin;
     private String duration;
     
-    List<Players> players = new ArrayList<Players>();
+    public static List<Players> players = new ArrayList<Players>();
     
     
 
@@ -287,6 +283,7 @@ public class HomeFrame extends javax.swing.JFrame {
         }
     }
      }
+        
 }
     }
 

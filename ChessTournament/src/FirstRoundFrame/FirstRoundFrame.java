@@ -4,19 +4,10 @@
  */
 package FirstRoundFrame;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
+
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  *
@@ -29,19 +20,6 @@ public class FirstRoundFrame extends javax.swing.JFrame {
      */
     public FirstRoundFrame() {
         initComponents();
-    }
-    
-    public static void loadSaved(){
-  try
-        {
-            FileInputStream fileIn = new FileInputStream("pens.ser");//The file that data has been save to, pens.ser
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            in.close();
-            fileIn.close();
-         }catch(IOException ioe){
-             ioe.printStackTrace();
-             return;
-          }
     }
 
     /**
