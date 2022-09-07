@@ -8,6 +8,10 @@ package FirstRoundFrame;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -197,7 +201,7 @@ public class FirstRoundFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -227,7 +231,21 @@ public class FirstRoundFrame extends javax.swing.JFrame {
                 new FirstRoundFrame().setVisible(true);
             }
         });
-    }
+        
+            FileInputStream fileIn = new FileInputStream("players.ser");//The file that data has been save to, pens.ser
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Players = (ArrayList) in.readObject();//pens is the arraylist that we want the data read to
+            in.close();
+            fileIn.close();
+            }catch(IOException ioe){
+             ioe.printStackTrace();
+             return;
+            }catch(ClassNotFoundException c){
+             System.out.println("Class not found");
+             c.printStackTrace();
+             return;
+            }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton PLAYER_1;
