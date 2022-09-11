@@ -1,3 +1,5 @@
+package FirstRoundFrame;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,7 +34,7 @@ public class HomeFrame extends javax.swing.JFrame {
     private String movestillwin;
     private String duration;
     
-    public static List<Players> players = new ArrayList<Players>();
+    //public static List<Players> players = new ArrayList<Players>();
     
     
 
@@ -254,9 +256,9 @@ public class HomeFrame extends javax.swing.JFrame {
         playername7 = name7.getText();
         playername8 = name8.getText();
         
-        Players play = new Players(playername,playername2,playername3,playername4,playername5,playername6,playername7,playername8,movestillwin,duration);
+        //Players play = new Players(playername,playername2,playername3,playername4,playername5,playername6,playername7,playername8,movestillwin,duration);
         
-        players.add(play); // <-- adds the Player to the list.  
+        //players.add(play); // <-- adds the Player to the list.  
         name1.setText("");
         name2.setText("");
         name3.setText("");
@@ -266,15 +268,15 @@ public class HomeFrame extends javax.swing.JFrame {
         name7.setText("");
         name8.setText("");
         
-        for(int i = 0; i < players.size(); i++) {
-        System.out.println(players.get(i).getPlayername());
-        }
+        //for(int i = 0; i < players.size(); i++) {
+        //System.out.println(players.get(i).getPlayername());
+        //}
         
         {
         try {
          FileOutputStream fileOut = new FileOutputStream("players.ser");//This saves the data to a file called players.ser in the save folder as the Main.java file.
          ObjectOutputStream out = new ObjectOutputStream(fileOut);
-         out.writeObject(players);//This save the data in the players arraylist
+         //out.writeObject(players);//This save the data in the players arraylist
          out.close();
          fileOut.close();
          System.out.println("Serialized data is saved in players.ser");
