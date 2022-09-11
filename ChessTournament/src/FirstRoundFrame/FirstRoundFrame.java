@@ -24,6 +24,8 @@ public class FirstRoundFrame extends javax.swing.JFrame {
      */
     public FirstRoundFrame() {
         initComponents();
+        
+        
     }
 
     /**
@@ -59,6 +61,11 @@ public class FirstRoundFrame extends javax.swing.JFrame {
         jLabel1.setText("CAS CHESS TOURNAMENT");
 
         jButton1.setText("SAVE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         PLAYER__1.setText("PLAYER__1");
         PLAYER__1.addActionListener(new java.awt.event.ActionListener() {
@@ -198,6 +205,10 @@ public class FirstRoundFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PLAYER__1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -231,19 +242,6 @@ public class FirstRoundFrame extends javax.swing.JFrame {
                 new FirstRoundFrame().setVisible(true);
             }
         });
-        
-            FileInputStream fileIn = new FileInputStream("players.ser");//The file that data has been save to, pens.ser
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            Players = (ArrayList) in.readObject();//pens is the arraylist that we want the data read to
-            in.close();
-            fileIn.close();
-            }catch(IOException ioe){
-             ioe.printStackTrace();
-             return;
-            }catch(ClassNotFoundException c){
-             System.out.println("Class not found");
-             c.printStackTrace();
-             return;
             }
 
 
