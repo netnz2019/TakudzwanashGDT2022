@@ -5,8 +5,10 @@
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,14 +67,14 @@ public class MainGame extends javax.swing.JFrame {
         Players play = new Players(playername,playername2,playername3,playername4,playername5,playername6,playername7,playername8,movestillwin,duration);
         
         players.add(play); // <-- adds the Player to the list.  
-        name1.setText("");
-        name2.setText("");
-        name3.setText("");
-        name4.setText("");
-        name5.setText("");
-        name6.setText("");
-        name7.setText("");
-        name8.setText("");
+        name1.setText(playername);
+        name2.setText(playername2);
+        name3.setText(playername3);
+        name4.setText(playername4);
+        name5.setText(playername5);
+        name6.setText(playername6);
+        name7.setText(playername7);
+        name8.setText(playername8);
         
         for(int i = 0; i < players.size(); i++) {
         System.out.println(players.get(i).getPlayername());
@@ -95,8 +97,38 @@ public class MainGame extends javax.swing.JFrame {
         card.show(MainPanel, "Game");
 } 
     }
+       PLAYER__1.setText(name1.getText());
+       PLAYER__2.setText(name2.getText());
+       PLAYER_3.setText(name3.getText());
+       PLAYER_4.setText(name4.getText());
+       PLAYER_5.setText(name5.getText());
+       PLAYER_6.setText(name6.getText());
+       PLAYER_7.setText(name7.getText());
+       PLAYER_8.setText(name8.getText());
      }
     }
+    }
+    
+    public static void loadSaved(){
+        try
+        {
+        FileInputStream fileIn = new FileInputStream("players.ser");//The file that data has been save to,
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        players = (ArrayList) in.readObject();//pens is the arraylist that we want the data read to
+        in.close();
+        fileIn.close();
+        }catch (IOException ioe) {
+         ioe.printStackTrace();
+         return;
+        }catch (ClassNotFoundException c) {
+        System.out.println( "Class not found");
+         c.printStackTrace();
+         return;       
+        }
+    }
+    
+    public void SetButton(){
+       
     }
 
     /**
@@ -311,7 +343,7 @@ public class MainGame extends javax.swing.JFrame {
 
         PLAYER_8.setText("PLAYER_8");
 
-        jButton2.setText("SAVE");
+        jButton2.setText("NEXT");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
