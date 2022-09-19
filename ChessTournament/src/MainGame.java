@@ -179,13 +179,15 @@ public class MainGame extends javax.swing.JFrame {
             PLAYER_2.setText(PLAYER_11.getText());   
         }
         
-        if (event.getSource() == PLAYER_2) {
-            PLAYER_1.setText(PLAYER_9.getText());   
+        if (event.getSource() == PLAYER_1) {
+            Winner_1.setText(PLAYER_1.getText());
+            System.out.println(Winner_1);
         }
         
-        //if (event.getSource() == PLAYER_2 {
-            //PLAYER_2 ==  winner);
-        //}
+        if (event.getSource() == PLAYER_2) {
+            Winner_1.setText(PLAYER_2.getText()); 
+            System.out.println(Winner_1);
+        }
     }
     }
     

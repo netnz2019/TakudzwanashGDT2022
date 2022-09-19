@@ -17,6 +17,7 @@ public class Players implements java.io.Serializable {
   private String playername6;
   private String playername7;
   private String playername8;
+  private String Winner_1;
   private String movestillwin;
   private String duration;
 
@@ -30,6 +31,7 @@ public class Players implements java.io.Serializable {
     this.playername6 = playername6;
     this.playername7 = playername7;
     this.playername8 = playername8;
+    this.Winner_1 = Winner_1;
     this.movestillwin = movestillwin;
     this.duration = duration;
   }
@@ -73,6 +75,11 @@ public class Players implements java.io.Serializable {
   public String getduration(){
     return this.duration;
   }
+  
+  public String getWinner_1(){
+    return this.Winner_1;
+  }
+  
 //setter
   public void setplayername( String playername){
   this.playername = playername;
@@ -108,6 +115,10 @@ public class Players implements java.io.Serializable {
   
   public void setmovestillwin(String movestillwin){
   this.movestillwin = movestillwin;
+  }
+  
+  public void setWinner_1(String Winner_1){
+  this.Winner_1 = Winner_1;
   }
   
   public void setduration(String duration){
