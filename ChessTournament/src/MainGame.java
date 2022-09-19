@@ -30,10 +30,11 @@ public class MainGame extends javax.swing.JFrame {
     private String movestillwin;
     private String duration;
     private String Winner_1;
+    private String newname;
     private Color pressedBackgroundColor;
 
     
-    public static List<Players> players = new ArrayList<Players>();
+    public static List <Players> players = new ArrayList<Players>();
 
     /**
      * Creates new form MainGame
@@ -42,6 +43,8 @@ public class MainGame extends javax.swing.JFrame {
         initComponents();
      theHandler handler = new theHandler();
      start.addActionListener(handler);
+     next.addActionListener(handler);
+     save.addActionListener(handler);
      jButton1.addActionListener(handler);
      PLAYER_1.addActionListener(handler);
      PLAYER_2.addActionListener(handler);
@@ -180,14 +183,39 @@ public class MainGame extends javax.swing.JFrame {
         }
         
         if (event.getSource() == PLAYER_1) {
-            Winner_1.setText(PLAYER_1.getText());
+            Winner_1 = (PLAYER_1.getText());
             System.out.println(Winner_1);
         }
         
         if (event.getSource() == PLAYER_2) {
-            Winner_1.setText(PLAYER_2.getText()); 
+            Winner_1 = (PLAYER_2.getText()); 
             System.out.println(Winner_1);
         }
+        
+        if (event.getSource() == next) {
+            CardLayout card = (CardLayout)MainPanel.getLayout();
+            card.show(MainPanel, "WinnersScreen");
+            winner.setText((Winner_1));
+        }
+        
+        // WINNER SCREEN CODE
+        
+        if (event.getSource() == save) {
+           newname = (filename.getText());
+           
+        try {
+         FileOutputStream fileOut = new FileOutputStream(newname + ".ser");//This saves the data to a file called players.ser in the save folder as the Main.java file.
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(players);//This save the data in the players arraylist
+         out.close();
+         fileOut.close();
+         System.out.println("Serialized data is saved in " + newname + ".ser");
+        }catch(IOException i) {
+         i.printStackTrace();
+        }
+        }
+        
+        
     }
     }
     
@@ -199,7 +227,7 @@ public class MainGame extends javax.swing.JFrame {
         {
         FileInputStream fileIn = new FileInputStream("players.ser");//The file that data has been save to,
         ObjectInputStream in = new ObjectInputStream(fileIn);
-        players = (ArrayList) in.readObject();//pens is the arraylist that we want the data read to
+        players = (ArrayList) in.readObject();//players is the arraylist that we want the data read to
         in.close();
         fileIn.close();
         }catch (IOException ioe) {
@@ -257,9 +285,16 @@ public class MainGame extends javax.swing.JFrame {
         PLAYER_4 = new javax.swing.JButton();
         PLAYER_7 = new javax.swing.JButton();
         PLAYER_8 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        next = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         WinnersScreen = new javax.swing.JPanel();
+        winnertext = new javax.swing.JLabel();
+        gametitle = new javax.swing.JLabel();
+        save = new javax.swing.JButton();
+        NEXT = new javax.swing.JButton();
+        tournamentname = new javax.swing.JLabel();
+        filename = new javax.swing.JTextField();
+        winner = new javax.swing.JLabel();
         PastGames = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -427,10 +462,10 @@ public class MainGame extends javax.swing.JFrame {
 
         PLAYER_8.setText("PLAYER_8");
 
-        jButton2.setText("NEXT");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        next.setText("NEXT");
+        next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                nextActionPerformed(evt);
             }
         });
 
@@ -451,25 +486,24 @@ public class MainGame extends javax.swing.JFrame {
                             .addGroup(GameLayout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(GameLayout.createSequentialGroup()
-                                        .addGap(5, 5, 5)
-                                        .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(GameLayout.createSequentialGroup()
-                                                .addComponent(PLAYER_6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE))
-                                            .addGroup(GameLayout.createSequentialGroup()
-                                                .addComponent(PLAYER_5)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
-                                    .addGroup(GameLayout.createSequentialGroup()
-                                        .addComponent(PLAYER__1)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(GameLayout.createSequentialGroup()
-                                        .addComponent(PLAYER__2)
-                                        .addGap(108, 108, 108)
-                                        .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(PLAYER_2)
-                                            .addComponent(PLAYER_1))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(PLAYER__1)
+                                    .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(GameLayout.createSequentialGroup()
+                                            .addGap(5, 5, 5)
+                                            .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(GameLayout.createSequentialGroup()
+                                                    .addComponent(PLAYER_6)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 412, Short.MAX_VALUE))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GameLayout.createSequentialGroup()
+                                                    .addComponent(PLAYER_5)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(PLAYER_1)
+                                                        .addComponent(PLAYER_2))
+                                                    .addGap(154, 154, 154))))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, GameLayout.createSequentialGroup()
+                                            .addComponent(PLAYER__2)
+                                            .addGap(0, 0, Short.MAX_VALUE)))))
                             .addGroup(GameLayout.createSequentialGroup()
                                 .addGap(129, 129, 129)
                                 .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,7 +532,7 @@ public class MainGame extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(155, 155, 155))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GameLayout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(259, 259, 259))))
         );
         GameLayout.setVerticalGroup(
@@ -514,45 +548,93 @@ public class MainGame extends javax.swing.JFrame {
                 .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PLAYER_10)
                     .addComponent(PLAYER_9))
+                .addGap(15, 15, 15)
+                .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PLAYER__2)
+                    .addComponent(PLAYER_4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PLAYER_5)
+                    .addComponent(PLAYER_7)
+                    .addComponent(PLAYER_2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(GameLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(PLAYER__2)
-                            .addComponent(PLAYER_4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                        .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(PLAYER_5)
-                            .addComponent(PLAYER_7)
-                            .addComponent(PLAYER_2))
-                        .addGap(18, 18, 18)
                         .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(PLAYER_11)
                             .addComponent(PLAYER_12))
                         .addGap(15, 15, 15)
                         .addGroup(GameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(PLAYER_6)
-                            .addComponent(PLAYER_8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11))
-                    .addGroup(GameLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(PLAYER_1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(PLAYER_8)))
+                    .addComponent(PLAYER_1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11))
         );
 
         MainPanel.add(Game, "Game");
+
+        winnertext.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        winnertext.setText("Winner:");
+
+        gametitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        gametitle.setText("CAS CHESS TOURNAMENT");
+
+        save.setText("Save FIle");
+
+        NEXT.setText("Contiune");
+
+        tournamentname.setText("Name This Tournament:");
+
+        winner.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        winner.setText("?????");
 
         javax.swing.GroupLayout WinnersScreenLayout = new javax.swing.GroupLayout(WinnersScreen);
         WinnersScreen.setLayout(WinnersScreenLayout);
         WinnersScreenLayout.setHorizontalGroup(
             WinnersScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 654, Short.MAX_VALUE)
+            .addGroup(WinnersScreenLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(WinnersScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(WinnersScreenLayout.createSequentialGroup()
+                        .addGap(0, 109, Short.MAX_VALUE)
+                        .addGroup(WinnersScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WinnersScreenLayout.createSequentialGroup()
+                                .addComponent(gametitle)
+                                .addGap(90, 90, 90))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WinnersScreenLayout.createSequentialGroup()
+                                .addComponent(winnertext)
+                                .addGap(18, 18, 18)
+                                .addGroup(WinnersScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tournamentname)
+                                    .addComponent(winner, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(134, 134, 134))))
+                    .addGroup(WinnersScreenLayout.createSequentialGroup()
+                        .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(filename, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(NEXT, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         WinnersScreenLayout.setVerticalGroup(
             WinnersScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 338, Short.MAX_VALUE)
+            .addGroup(WinnersScreenLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gametitle)
+                .addGap(95, 95, 95)
+                .addGroup(WinnersScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(winnertext)
+                    .addComponent(winner, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(tournamentname)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(WinnersScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filename, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NEXT, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
 
         MainPanel.add(WinnersScreen, "WinnersScreen");
@@ -594,9 +676,9 @@ public class MainGame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PLAYER__1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_nextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -637,6 +719,7 @@ public class MainGame extends javax.swing.JFrame {
     private javax.swing.JPanel Game;
     private javax.swing.JPanel Home;
     private javax.swing.JPanel MainPanel;
+    private javax.swing.JButton NEXT;
     private javax.swing.JButton PLAYER_1;
     private javax.swing.JButton PLAYER_10;
     private javax.swing.JButton PLAYER_11;
@@ -654,8 +737,9 @@ public class MainGame extends javax.swing.JFrame {
     private javax.swing.JPanel PastGames;
     private javax.swing.JPanel WinnersScreen;
     private javax.swing.JTextField date;
+    private javax.swing.JTextField filename;
+    private javax.swing.JLabel gametitle;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -670,6 +754,11 @@ public class MainGame extends javax.swing.JFrame {
     private javax.swing.JTextField name6;
     private javax.swing.JTextField name7;
     private javax.swing.JTextField name8;
+    private javax.swing.JButton next;
+    private javax.swing.JButton save;
     private javax.swing.JButton start;
+    private javax.swing.JLabel tournamentname;
+    private javax.swing.JLabel winner;
+    private javax.swing.JLabel winnertext;
     // End of variables declaration//GEN-END:variables
 }
