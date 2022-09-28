@@ -36,7 +36,6 @@ public class MainGame extends javax.swing.JFrame {
     private String newname;
     private String sourceFolder="";
     private String theFile="";
-    JFileChooser chooser;
     private String choosertitle;
     
     
@@ -247,16 +246,16 @@ public class MainGame extends javax.swing.JFrame {
         load.addActionListener(this);
         
         System.out.println("Button Clicked");
-        chooser = new JFileChooser(); 
+        JFileChooser chooser = new JFileChooser();
+        
         chooser.setCurrentDirectory(new java.io.File("."));
         chooser.setDialogTitle(choosertitle);
-         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-         "Ser, SER");
-         chooser.setFileFilter(filter);
-         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        final FileNameExtensionFilter filter = new FileNameExtensionFilter(null, "Ser");
+        chooser.setFileFilter(filter);
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
     
     
-        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) { 
+        if (chooser.showOpenDialog(MainGame.this) == JFileChooser.APPROVE_OPTION) { 
       
          String dirr = "" + chooser.getCurrentDirectory();
          File file = chooser.getSelectedFile();
@@ -276,6 +275,25 @@ public class MainGame extends javax.swing.JFrame {
       }else {
           System.out.println("No Selection ");
       }
+        
+      try
+        {
+        FileInputStream fileIn = new FileInputStream(chooser.getSelectedFile());//The file that data has been save to,
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        players = (ArrayList) in.readObject();//players is the arraylist that we want the data read to
+        in.close();
+        fileIn.close();
+        }catch (IOException ioe) {
+         ioe.printStackTrace();
+         return;
+        }catch (ClassNotFoundException c) {
+        System.out.println( "Class not found");
+         c.printStackTrace();
+         return;       
+        }
+      
+     
+        winner_name.setText(Winner_1.getText());
           
     }
     }
@@ -289,7 +307,7 @@ public class MainGame extends javax.swing.JFrame {
     public static void loadSaved(){
         try
         {
-        FileInputStream fileIn = new FileInputStream("players.ser");//The file that data has been save to,
+        FileInputStream fileIn = new FileInputStream("File");//The file that data has been save to,
         ObjectInputStream in = new ObjectInputStream(fileIn);
         players = (ArrayList) in.readObject();//players is the arraylist that we want the data read to
         in.close();
