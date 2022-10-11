@@ -291,10 +291,6 @@ public class MainGame extends javax.swing.JFrame {
          c.printStackTrace();
          return;       
         }
-      
-     
-        winner_name.setText(Winner_1.getText());
-          
     }
     }
     
