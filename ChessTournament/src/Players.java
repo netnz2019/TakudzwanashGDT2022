@@ -20,9 +20,10 @@ public class Players implements java.io.Serializable {
   private String Winner_1;
   private String movestillwin;
   private String duration;
+  private int playerposition;
 
  //Constructor that takes arguments
-  public Players (String playername,String playername2,String playername3,String playername4,String playername5,String playername6,String playername7,String playername8,String movestillwin,String duration){
+  public Players (String playername,String playername2,String playername3,String playername4,String playername5,String playername6,String playername7,String playername8,String movestillwin,String duration, int playerposition){
     this.playername = playername;
     this.playername2 = playername2;
     this.playername3 = playername3;
@@ -34,6 +35,7 @@ public class Players implements java.io.Serializable {
     this.Winner_1 = Winner_1;
     this.movestillwin = movestillwin;
     this.duration = duration;
+    this.playerposition = playerposition;
   }
 //getter
   public String getPlayername(){
@@ -80,6 +82,10 @@ public class Players implements java.io.Serializable {
     return this.Winner_1;
   }
   
+  public int getplayerposition(){
+     return this.playerposition;
+  }
+  
 //setter
   public void setplayername( String playername){
   this.playername = playername;
@@ -123,6 +129,10 @@ public class Players implements java.io.Serializable {
   
   public void setduration(String duration){
   this.duration = duration;
+  }
+  
+  public void setplayerposition(int playerposition){
+      this.playerposition = playerposition;
   }
 }
 
