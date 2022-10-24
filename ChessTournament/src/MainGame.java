@@ -105,25 +105,17 @@ public class MainGame extends javax.swing.JFrame {
         playername8 = name8.getText();
         
      //Only sets the contestants name as variable when start button is pressed
-     
-       if (event.getSource() == start){
-           if (name1.getText().length() > 0){
-               
-           }
-           
-       }
-     
-     
-     
+
         if (event.getSource() == start) {
-        playername = name1.getText();
-        playername2 = name2.getText();
-        playername3 = name3.getText();
-        playername4 = name4.getText();
-        playername5 = name5.getText();
-        playername6 = name6.getText();
-        playername7 = name7.getText();
-        playername8 = name8.getText();
+            if (name1.getText().length() > 0 && name2.getText().length() > 0 && name3.getText().length() > 0  && name4.getText().length() > 0  && name5.getText().length() > 0 && name6.getText().length() > 0 && name7.getText().length() > 0 && name8.getText().length() > 0 ) {
+             playername = name1.getText();
+            playername2 = name2.getText();
+            playername3 = name3.getText();
+            playername4 = name4.getText();
+            playername5 = name5.getText();
+            playername6 = name6.getText();
+            playername7 = name7.getText();
+            playername8 = name8.getText();
         
         
     // adds each player object to Arraylist
@@ -156,13 +148,12 @@ public class MainGame extends javax.swing.JFrame {
         }catch(IOException i) {
          i.printStackTrace();
         }
-        {       
+               
             
         // when start is pressed it opens Game Jpanel from Mainpanel    
         CardLayout card = (CardLayout)MainPanel.getLayout();
         card.show(MainPanel, "Game");
         
-} 
     }
       //changes button text to contestant name variable 
        PLAYER__1.setText(name1.getText());
@@ -389,7 +380,7 @@ public class MainGame extends javax.swing.JFrame {
     */
     
 
-    public static void loadSaved(){
+    //public static void loadSaved(){
         try
         {
         FileInputStream fileIn = new FileInputStream("File");//The file that data has been save to,
@@ -568,7 +559,6 @@ public class MainGame extends javax.swing.JFrame {
 
         start.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         start.setText("START");
-        start.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel4.setText("How To Play:");
@@ -756,7 +746,7 @@ public class MainGame extends javax.swing.JFrame {
                                             .addComponent(PLAYER_5)
                                             .addComponent(PLAYER__1)
                                             .addComponent(PLAYER_6))
-                                        .addGap(0, 301, Short.MAX_VALUE))
+                                        .addGap(0, 435, Short.MAX_VALUE))
                                     .addGroup(GameLayout.createSequentialGroup()
                                         .addComponent(PLAYER__2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
