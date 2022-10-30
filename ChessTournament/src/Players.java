@@ -7,132 +7,51 @@
  *
  * @author tgumb
  */
+import java.util.Scanner;
+import java.io.*;
+
 public class Players implements java.io.Serializable {
-//INTANCE VERIABLE
-  private String playername;
-  private String playername2;
-  private String playername3;
-  private String playername4;
-  private String playername5;
-  private String playername6;
-  private String playername7;
-  private String playername8;
-  private String Winner_1;
-  private String movestillwin;
-  private String duration;
-  private int playerposition;
+
+    //INTANCE VERIABLE
+  private String contestant;
+  private int position;
+  private boolean winner;
+
 
  //Constructor that takes arguments
-  public Players (String playername,String playername2,String playername3,String playername4,String playername5,String playername6,String playername7,String playername8,String movestillwin,String duration, int playerposition){
-    this.playername = playername;
-    this.playername2 = playername2;
-    this.playername3 = playername3;
-    this.playername4 = playername4;
-    this.playername5 = playername5;
-    this.playername6 = playername6;
-    this.playername7 = playername7;
-    this.playername8 = playername8;
-    this.Winner_1 = Winner_1;
-    this.movestillwin = movestillwin;
-    this.duration = duration;
-    this.playerposition = playerposition;
-  }
-//getter
-  public String getPlayername(){
-    return this.playername;
-  }
+  public Players (String contestant, int position, boolean winner){
+        this.contestant  = contestant;
+        this.position = position;
+        this.winner = winner;
+      }
   
-  public String getPlayername2(){
-    return this.playername2;
-  }
-  
-  public String getPlayername3(){
-    return this.playername3;
-  }
-  
-  public String getPlayername4(){
-    return this.playername4;
-  }
-  
-  public String getPlayername5(){
-    return this.playername5;
-  }
-  
-  public String getPlayername6(){
-    return this.playername6;
-  }
-  
-  public String getPlayername7(){
-    return this.playername7;
-  }
-  
-  public String getPlayername8(){
-    return this.playername8;
-  }
-  
-  public String getmovestillwin(){
-    return this.movestillwin;
-  }
-  
-  public String getduration(){
-    return this.duration;
-  }
-  
-  public String getWinner_1(){
-    return this.Winner_1;
-  }
-  
-  public int getplayerposition(){
-     return this.playerposition;
-  }
-  
-//setter
-  public void setplayername( String playername){
-  this.playername = playername;
-  }
-  
-  public void setplayername2( String playername2){
-  this.playername2 = playername2;
-  }
-  
-  public void setplayername3( String playername3){
-  this.playername3 = playername3;
-  }
-  
-  public void setplayername4( String playername4){
-  this.playername4 = playername4;
-  }
-  
-  public void setplayername5( String playername5){
-  this.playername5 = playername5;
-  }
-  
-  public void setplayername6( String playername6){
-  this.playername6 = playername6;
-  }
-  
-  public void setplayername7( String playername7){
-  this.playername7 = playername7;
-  }
-  
-  public void setplayername8( String playername8){
-  this.playername8 = playername8;
-  }
-  
-  public void setmovestillwin(String movestillwin){
-  this.movestillwin = movestillwin;
-  }
-  
-  public void setWinner_1(String Winner_1){
-  this.Winner_1 = Winner_1;
-  }
-  
-  public void setduration(String duration){
-  this.duration = duration;
-  }
-  
-  public void setplayerposition(int playerposition){
-      this.playerposition = playerposition;
-  }
+    //getter
+      public boolean getwinner(){
+        return this.winner;
+      }
+
+      public String getcontestant(){
+        return this.contestant;
+      }
+
+      public int getposition(){
+        return this.position;
+      }
+
+
+    //setter
+      public void setcontestant( String contestant){
+      this.contestant = contestant;
+      }
+
+      public void setplayername2( boolean winner){
+      this.winner = winner;
+      }
+
+      public void setposition(int position){
+      this.position = position;
+      }
+
 }
 
+        
