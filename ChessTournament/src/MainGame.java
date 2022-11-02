@@ -3,8 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-// IMPORTS
+/**
+ *
+ * @author tgumb
+ * 
+ * This MainGame class, holds all the code that runs the chess tournament, the program starts with a page full of name fields 
+ * to fill out which if meet the requirements get put into the game info array list, after this the tournament begins when start is pressed 
+ * and at this point the program is completely run by if statements and action listeners, because the only way for a player to 
+ * progress is by when the button with there name on it is pressed, this continues on until a winner is decided. once the winner is decided 
+ * and the tournament is finished, user is take to the winners page where the winner is shown on the center of the screen, and the user
+ * is encouraged to save the tournament by naming it and pressing the save button, and it should go through and work if filename meets 
+ * correct requirements, when this happens and users presses next, the main page is reset meaning old player name inputs get set back to empty
+ * ready for user to restart. 
+ * 
+ * Past matches, is what loads the users saved file and displays data found in the file, it does this by reading the file into the 
+ * contestant_pastgames array list and though this loads the old tournament data. 
+ * 
+ * 
+ */
 
+// IMPORTS
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -25,16 +43,9 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-///
-
-
-/**
- *
- * @author tgumb
- */
-
 public class MainGame extends javax.swing.JFrame {
     
+    //player name variables
     private String playername;
     private String playername2;
     private String playername3;
@@ -44,7 +55,7 @@ public class MainGame extends javax.swing.JFrame {
     private String playername7;
     private String playername8;
     
-    //First Round Postions
+    //First Round Postions variables
     private int playerpos;
     private int playerpos2;
     private int playerpos3;
@@ -54,38 +65,48 @@ public class MainGame extends javax.swing.JFrame {
     private int playerpos7;
     private int playerpos8;
     
-    //Second Round Position
+    //Second Round Position variables
     private int playerpos9;
     private int playerpos10;
 
 
     
-    
+    //date variable
     private int Date;
+    
+    //Naming file variable
     private String newname;
+    
+    //winner and second place variables
     private String Winner_1;
     private String seconds;
+    
+    //file loading variables
     private String sourceFolder="";
     private String theFile="";
     private String choosertitle;
+    
+    //max character limit
     private int maxlength = 8; 
     
-    //GameArray ARRAYLSIT
+    //Gameinfo Arraylist 
     public static List <GameInfo> gameinfo = new ArrayList<GameInfo>();
     
+    //contestant Arraylist 
     public static List <Players> contestant = new ArrayList<Players>();
     
+    //contestant_pastgames Arraylist 
     public static List <Players> contestant_pastgames = new ArrayList<Players>();
 
     /**
      * Creates new form MainGame
      */
     
-    /**
-     //Adds action listener to buttons
-    */
+    
     public MainGame() {
         initComponents();
+        
+    //Adds action listener to buttons
         
      dt();
      theHandler handler = new theHandler();
@@ -115,7 +136,7 @@ public class MainGame extends javax.swing.JFrame {
 
     @Override
     
-    //Sets contestants name as variable
+    //Sets contestants name to variable
     
     public void actionPerformed(ActionEvent event) {
         playername = name1.getText();
@@ -127,9 +148,12 @@ public class MainGame extends javax.swing.JFrame {
         playername7 = name7.getText();
         playername8 = name8.getText();
         
-     //Only sets the contestants name as variable when start button is pressed
+        
+     //Only sets the contestants name as variable when start button is pressed but checks if each input is more then 0 characters before it runs the program
 
-      if((event.getSource() == start) && (name1.getText().length() > 0 && name2.getText().length() > 0 && name3.getText().length() > 0  && name4.getText().length() > 0  && name5.getText().length() > 0 && name6.getText().length() > 0 && name7.getText().length() > 0 && name8.getText().length() > 0 )) {
+     
+      if((event.getSource() == start) && (name1.getText().length() > 0 && name2.getText().length() > 0 && name3.getText().length() > 0  && name4.getText().length() > 0 
+         && name5.getText().length() > 0 && name6.getText().length() > 0 && name7.getText().length() > 0 && name8.getText().length() > 0 )) {
    
         playername = name1.getText();
         playername2 = name2.getText();
@@ -141,7 +165,7 @@ public class MainGame extends javax.swing.JFrame {
         playername8 = name8.getText();
         
         
-    // adds game infomation into to Arraylist
+    // adds game infomation into to GameInfo Arraylist
         
         GameInfo play = new GameInfo(playername,playername2,playername3,playername4,playername5,playername6,playername7,playername8,Winner_1, Date, seconds);
         
@@ -177,10 +201,11 @@ public class MainGame extends javax.swing.JFrame {
         CardLayout card = (CardLayout)MainPanel.getLayout();
         card.show(MainPanel, "Game");
       }
- 
+     //if there is an empty player input it shows this message.
       }else if ((event.getSource() == start)){
            JOptionPane.showMessageDialog(MainPanel, "You need 8 contestants to contiune"); 
         }
+      
       
       //changes button text to contestant name variable 
        PLAYER__1.setText(name1.getText());
@@ -191,9 +216,10 @@ public class MainGame extends javax.swing.JFrame {
        PLAYER_6.setText(name6.getText());
        PLAYER_7.setText(name7.getText());
        PLAYER_8.setText(name8.getText());
-       //MAIN GAME CODE
+   
         
-       
+       //Main Game Code ran but if statements 
+       //ROUND 1
         if (event.getSource() == PLAYER__1) {
             PLAYER_10.setText(name1.getText());
             PLAYER__1.setBackground(Color.GREEN);
@@ -210,8 +236,7 @@ public class MainGame extends javax.swing.JFrame {
             playerpos2 = 3;
         }
         
-     
-     //Main Game Code ran but if statements   
+      
         if (event.getSource() == PLAYER_3) {
             PLAYER_9.setText(name3.getText());
             PLAYER_4.setBackground(Color.RED);
@@ -262,10 +287,8 @@ public class MainGame extends javax.swing.JFrame {
             playerpos8 = 40;
         }
         
-        //Checks winner of the round 2 and round 1
         
-        
-        //Winner of 9 and 12 go to 1 and Winner of 10 and 11 go to 2
+       //ROUND 2 
         if (event.getSource() == PLAYER_9) {
             PLAYER_1.setText(PLAYER_9.getText());
             PLAYER_9.setBackground(Color.GREEN);
@@ -290,6 +313,8 @@ public class MainGame extends javax.swing.JFrame {
             PLAYER_11.setBackground(Color.GREEN);
         }
         
+        
+        //ROUND 3 FINAL 
         if (event.getSource() == PLAYER_1) {
             Winner_1 = (PLAYER_1.getText());
             System.out.println(Winner_1);
@@ -298,10 +323,9 @@ public class MainGame extends javax.swing.JFrame {
             selectwinner.setText(""); 
             
             seconds = (PLAYER_2.getText());
-            
+           
             playerpos9 = 1;
             playerpos10 = 2;
-            
         }
         
         if (event.getSource() == PLAYER_2) {
@@ -318,11 +342,13 @@ public class MainGame extends javax.swing.JFrame {
             playerpos10 = 1;
         }
         
+        
+        //checks if there are players in the player round 3
         if (!PLAYER_1.getText().isEmpty() && !PLAYER_2.getText().isEmpty()){
             selectwinner.setText("Select the Winner"); 
         }
         
-
+        //checks if winner is chosen then saves player object to contestants arraylist
         if (event.getSource() == next && Winner_1 != null) {
             
             contestant.add(new Players(name1.getText(),playerpos,false));
@@ -354,12 +380,12 @@ public class MainGame extends javax.swing.JFrame {
         
         
         // WINNER SCREEN CODE 
+
         
-        
-        //Saves arraylist as new file
         if (event.getSource() == save && filename.getText().length() > 2) {
            newname = (filename.getText());
            
+        //Saves arraylist as new file   
         try {
          FileOutputStream fileOut = new FileOutputStream(newname + ".ser");//This saves the data to a file called players.ser in the save folder as the Main.java file.
          ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -400,7 +426,7 @@ public class MainGame extends javax.swing.JFrame {
             card.show(MainPanel, "PastGames"); 
         }
     }
-    
+    //Testing saves
     public static void listAllPenDetails(ArrayList<Players> listThese){
         System.out.println("LIST of details");
         for(Players contestant:listThese){
@@ -416,8 +442,8 @@ public class MainGame extends javax.swing.JFrame {
 }
   
     public void dt(){
-
-    Date d  =new Date();
+    //gets the current date and sets it as the date variable from above.
+    Date d  = new Date();
     
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
     
@@ -1174,18 +1200,16 @@ public class MainGame extends javax.swing.JFrame {
            dirr = dirr.substring(0,dirr.length()-1);
            sourceFolder=""+dirr + "" + file.getName();
         }else{
-            
             sourceFolder=""+dirr + "/" + file.getName();
         }
-
           System.out.println("Folder path: " + dirr + " | File Name: " + file.getName());
           System.out.println(sourceFolder);
-        //ExamineImage.lum(sourceFolder);
     
       }else {
           System.out.println("No Selection ");
       }
         
+     //Opens serialized file
       try
         {
         FileInputStream fileIn = new FileInputStream(chooser.getSelectedFile());//The file that data has been save to,
@@ -1202,6 +1226,7 @@ public class MainGame extends javax.swing.JFrame {
          return;       
         }
       
+      //gets each player object from contestant_pastgames array list and puts each player based on there position in each button. 
       for (int index = 0; index < contestant_pastgames.size(); index++){
       System.out.println(index);
       
@@ -1285,6 +1310,11 @@ public class MainGame extends javax.swing.JFrame {
 
     private void name1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name1KeyPressed
         // TODO add your handling code here:
+        
+        if ((name1.getText().length() > maxlength)){
+           JOptionPane.showMessageDialog(MainPanel, "Name is too long (player name can not be more then 8 letters long"); 
+        }
+        
         if(name1.getText().trim().length()>= maxlength)
        {
         name1.setText(name1.getText().substring(0, maxlength));
@@ -1295,6 +1325,11 @@ public class MainGame extends javax.swing.JFrame {
 
     private void name2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name2KeyPressed
         // TODO add your handling code here:
+        
+        if ((name2.getText().length() > maxlength)){
+           JOptionPane.showMessageDialog(MainPanel, "Name is too long (player name can not be more then 8 letters long"); 
+        }
+        
         if(name2.getText().length()>=maxlength)
        {
         name2.setText(name2.getText().substring(0, maxlength));
@@ -1305,6 +1340,11 @@ public class MainGame extends javax.swing.JFrame {
 
     private void name3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name3KeyPressed
         // TODO add your handling code here:
+        
+        if ((name3.getText().length() > maxlength)){
+           JOptionPane.showMessageDialog(MainPanel, "Name is too long (player name can not be more then 8 letters long"); 
+        }
+        
         if(name3.getText().length()>=maxlength)
        {
         name3.setText(name3.getText().substring(0, maxlength));
@@ -1315,6 +1355,11 @@ public class MainGame extends javax.swing.JFrame {
 
     private void name6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name6KeyPressed
         // TODO add your handling code here:
+        
+        if ((name6.getText().length() > maxlength)){
+           JOptionPane.showMessageDialog(MainPanel, "Name is too long (player name can not be more then 8 letters long"); 
+        }
+        
         if(name6.getText().length()>= maxlength)
        {
         name6.setText(name6.getText().substring(0, maxlength));
@@ -1325,6 +1370,11 @@ public class MainGame extends javax.swing.JFrame {
 
     private void name8KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name8KeyPressed
         // TODO add your handling code here:
+        
+        if ((name8.getText().length() > maxlength)){
+           JOptionPane.showMessageDialog(MainPanel, "Name is too long (player name can not be more then 8 letters long"); 
+        }
+        
         if(name8.getText().length()>= maxlength)
        {
         name8.setText(name8.getText().substring(0, maxlength));
@@ -1335,6 +1385,11 @@ public class MainGame extends javax.swing.JFrame {
 
     private void name7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name7KeyPressed
         // TODO add your handling code here:
+        
+        if ((name7.getText().length() > maxlength)){
+           JOptionPane.showMessageDialog(MainPanel, "Name is too long (player name can not be more then 8 letters long"); 
+        }
+        
         if(name7.getText().length()>= maxlength)
        {
         name7.setText(name7.getText().substring(0, maxlength));
@@ -1345,6 +1400,11 @@ public class MainGame extends javax.swing.JFrame {
 
     private void name4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name4KeyPressed
         // TODO add your handling code here:
+        
+        if ((name4.getText().length() > maxlength)){
+           JOptionPane.showMessageDialog(MainPanel, "Name is too long (player name can not be more then 8 letters long"); 
+        }
+        
         if(name4.getText().length()>= maxlength)
        {
         name4.setText(name4.getText().substring(0, maxlength));
@@ -1355,6 +1415,11 @@ public class MainGame extends javax.swing.JFrame {
 
     private void name5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name5KeyPressed
         // TODO add your handling code here:
+        
+        if ((name5.getText().length() > maxlength)){
+           JOptionPane.showMessageDialog(MainPanel, "Name is too long (player name can not be more then 8 letters long"); 
+        }
+        
         if(name5.getText().length()>= maxlength)
        {
         name5.setText(name5.getText().substring(0, maxlength));
@@ -1365,7 +1430,13 @@ public class MainGame extends javax.swing.JFrame {
 
     private void filenameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filenameKeyPressed
         // TODO add your handling code here:
-        if(filename.getText().length()>=10)
+        
+        if ((filename.getText().length() > maxlength)){
+           JOptionPane.showMessageDialog(MainPanel, "Filename is too long (File name can not be more then 8 letters long"); 
+        }
+     
+        
+        if(filename.getText().length()>= maxlength)
        {
         filename.setText(filename.getText().substring(0, maxlength));
        }else{
@@ -1379,6 +1450,7 @@ public class MainGame extends javax.swing.JFrame {
 
     private void filenameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filenameKeyReleased
         // TODO add your handling code here:
+        //if filename input is empty buttons won't be active
         if (filename.getText().length() > 0)
         {
            NEXT.setEnabled(true);
@@ -1395,6 +1467,8 @@ public class MainGame extends javax.swing.JFrame {
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
+        
+        //clears arraylist and resets format of past games jframe
            contestant_pastgames.clear();
            System.out.println(contestant_pastgames);
            CardLayout card = (CardLayout)MainPanel.getLayout();
@@ -1447,12 +1521,14 @@ public class MainGame extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
+        //if you press back button from winner jframe.
         CardLayout card = (CardLayout)MainPanel.getLayout();
         card.show(MainPanel, "Game");
     }//GEN-LAST:event_backActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        //if you press back button from game jframe
         CardLayout card = (CardLayout)MainPanel.getLayout();
         card.show(MainPanel, "Home");
     }//GEN-LAST:event_jButton1ActionPerformed

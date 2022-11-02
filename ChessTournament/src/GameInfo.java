@@ -6,9 +6,16 @@
 /**
  *
  * @author tgumb
+ * 
+ * The Game info class, is here to make an object of each tournament that happens it does this by saving data like,
+ * player name as seen below, it also saves the winner of the current tournament, the second place person,
+ * and the date of the tournament. each tournament saved as an object in the game info array list found in MainGame class.
+ * The Game info class, is also used to run the each tournament because the tournament runs off the player name variables
+ * shown below. 
+ * 
  */
 public class GameInfo implements java.io.Serializable {
-//INTANCE VERIABLE
+//INSTANCE VARIABLE
   private String playername;
   private String playername2;
   private String playername3;
@@ -36,7 +43,7 @@ public class GameInfo implements java.io.Serializable {
     this.seconds = seconds;
     this.Date = Date;
   }
-//getter
+//getter methods 
   public String getPlayername(){
     return this.playername;
   }
@@ -84,7 +91,7 @@ public class GameInfo implements java.io.Serializable {
   
   
   
-//setter
+//setter methods
   public void setplayername( String playername){
   this.playername = playername;
   }
